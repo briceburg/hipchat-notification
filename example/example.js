@@ -2,35 +2,38 @@
 //  HIPCHAT_TOKEN
 //  HIPCHAT_ROOM
 
-//var hipchat = require('hipchat-notifier').make(
-var hipchat = require('../index.js').make(
+
+// instantiate a hipchat-notifier
+var hipchat = require('hipchat-notifier').make(
   process.env.HIPCHAT_ROOM,
   process.env.HIPCHAT_TOKEN
 );
 
+// the pyramid of doom example, calls to hipchat are serial
+hipchat.notice('this is a .notice()', function(err, response, body){
+  hipchat.info('this is a .info()', function(err, response, body){
+    hipchat.success('this is a .success()', function(err, response, body){
+      hipchat.warning('this is a .warning()', function(err, response, body){
+        hipchat.failure('this is a .failure()', function(err, response, body){
 
-hipchat.notice('this is a .notice()');
-hipchat.info('this is a .info()');
-hipchat.success('this is a .success()');
-hipchat.warning('this is a .warning()');
-hipchat.failure('this is a .failure()');
+          // random color html message with callback
+          //  supports cards &c, see:
+          //    https://www.hipchat.com/docs/apiv2/method/send_room_notification
 
+          var body = {
+            from: 'random color label',
+            message: '<p><em>this message</em> is a random color',
+            color: 'random'
+          };
 
-// random color html message with callback
-//  supports cards &c, see:
-//    https://www.hipchat.com/docs/apiv2/method/send_room_notification
+          hipchat.send(body);
 
-var body = {
-  from: 'hipchat notifier',
-  message: '<p><em>this message</em> is a random color',
-  color: 'random'
-};
+          // getters and setters are supported
+          hipchat.setFrom('setter label');
+          hipchat.notice('from setter label');
 
-hipchat.send(body, function(err, response, body){
-  console.log('NOTIFIER CALLBACK!', response);
+        });
+      });
+    });
+  });
 });
-
-
-// getters and setters are supported
-hipchat.setFrom('hipchat notifier deux');
-hipchat.notice('from deux');
