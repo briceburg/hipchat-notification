@@ -1,11 +1,9 @@
 # application
 #############
-/node_modules
-/config.json
+node_modules/
 
 # compiled marko templates
 *.marko.js
-
 
 # editors
 #########
