@@ -1,5 +1,5 @@
 {
-  "name": "hipchat-notification",
+  "name": "hipchat-notifier",
   "version": "1.0.0",
   "description": "Send room notifications to the HipChat v2 API",
   "main": "index.js",
