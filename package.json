@@ -1,0 +1,13 @@
+{
+  "name": "hipchat-notification",
+  "version": "1.0.0",
+  "description": "Send room notifications to the HipChat v2 API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brice Burgess @iceburgBrice",
+  "license": "MIT",
+  "dependencies": {
+  }
+}
