@@ -5,16 +5,17 @@ var _ = require('lodash');
 // exports
 //////////
 
-var HipChatNotifier = function(room, token, from, host){
+var HipChatNotifier = function(room, token, from, host, notify){
   this.room = room;
   this.token = token;
   this.from = from || '';
   this.host = host || 'api.hipchat.com';
+  this.notify = notify || false;
 };
 
 module.exports = {
-  'make': function(room, token, from, host){
-    return new HipChatNotifier(room, token, from, host);
+  'make': function(room, token, from, host, notify){
+    return new HipChatNotifier(room, token, from, host, notify);
   }
 };
 
@@ -55,7 +56,7 @@ HipChatNotifier.prototype.send = function(jsonBody, callback){
     from: this.from,
     color: 'random',
     message_format: /<[a-z][\s\S]*>/i.test(jsonBody.message) ? 'html' : 'text',
-    notify: false
+    notify: this.notify
   };
 
   request({
