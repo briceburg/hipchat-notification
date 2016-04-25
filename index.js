@@ -86,3 +86,11 @@ HipChatNotifier.prototype.setRoom = function(room_id_or_name){
 HipChatNotifier.prototype.setToken = function(token){
   this.token = token;
 };
+
+HipChatNotifier.prototype.setHost = function(host){
+  this.host = host;
+};
+
+HipChatNotifier.prototype.setNotify = function(notify){
+  this.notify = notify;
+};
