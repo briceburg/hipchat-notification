@@ -34,8 +34,20 @@ hipchat.notice('this is a .notice()', function(err, response, body){
       hipchat.warning('this is a .warning()', function(err, response, body){
         hipchat.failure('this is a .failure()', function(err, response, body){
 
-          // random color html message with callback
-          //  supports cards &c, see:
+
+          // getters and setters are supported
+          hipchat.setFrom('setter label');
+          hipchat.setNotify(true);
+
+          hipchat.setRoom(room);
+          hipchat.setToken(token);
+          hipchat.setHost('api.hipchat.com');
+
+          // bombs away
+          hipchat.notice('from setter label');
+
+          // support passing an explicit API object, falls back to defaults.
+          // allows sending HipChat cards &c. see:
           //    https://www.hipchat.com/docs/apiv2/method/send_room_notification
 
           var body = {
@@ -44,12 +56,14 @@ hipchat.notice('this is a .notice()', function(err, response, body){
             color: 'random'
           };
 
-          hipchat.send(body);
-
-          // getters and setters are supported
-          hipchat.setFrom('setter label');
-          hipchat.notice('from setter label');
-
+          // bombs away deux!
+          // callbacks are supported as 2nd argument
+          hipchat.send(body, function(err, res, body){
+            if(err) {
+              throw new Error(err);
+            }
+            console.log('finished');
+          });
         });
       });
     });
