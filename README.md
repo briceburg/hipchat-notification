@@ -11,7 +11,7 @@ to the [HipChat](https://www.hipchat.com/) v2 API using a [Bearer Token](https:/
 ## Installation
 
 ```js
-$ npm install --save hipchat-notification
+$ npm install --save hipchat-notifier
 ```
 
 
